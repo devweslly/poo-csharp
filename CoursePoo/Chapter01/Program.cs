@@ -1,4 +1,5 @@
 ﻿using Chapter01;
+using System.Globalization;
 
 public class Program
 {
@@ -11,6 +12,14 @@ public class Program
         CompareAge();
 
         CalculateAverageSalary();
+
+        CalculateNote();
+
+        IncreaseSalary();
+
+        CalculateCircumference();
+
+        Converter();
     }
     
     #region Triangle
@@ -132,6 +141,101 @@ public class Program
         double averageSalary = (firstSalary + secondSalary) / 2;
 
         return $"Average Salary: R$ {averageSalary}";
+    }
+    #endregion
+
+    #region Student
+    public static void CalculateNote()
+    {
+        Student pedro = new Student()
+        {
+            Name        = "Pedro",
+            firstTri    = 17.00,
+            secondTri   = 20.00,
+            thirdTri    = 15.00
+        };
+
+        pedro.DisplaysNote();
+    }
+    #endregion
+
+    #region Employee Salary
+    public static void IncreaseSalary()
+    {
+        EmployeeSalary pedro = new()
+        {
+            Name        = "Pedro",
+            GrossSalary = 6000.00,
+            Tax         = 1000.00
+        };
+
+        Console.WriteLine(pedro);
+
+        pedro.IncreaseSalary(10.0);
+
+        Console.WriteLine("UpdatedData");
+        Console.WriteLine(pedro);
+    }
+    #endregion
+
+    #region Calculate
+    public class Calculate
+    {
+        public static double PI = Math.PI;
+
+        // Here we use a class with static members
+        public static double Circumference(double radius)
+        {
+            return 2.0 * PI * radius;
+        }
+
+        public static double Volume(double radius)
+        {
+            return 4.0 / 3.0 * PI * Math.Pow(radius, 3);
+        }
+    }
+    private static void CalculateCircumference()
+    {
+        double radius           = 3.0;
+
+        // When a class uses static members
+        // We can call its methods without having to instantiate it
+
+        double circumference    = Calculate.Circumference(radius);
+        double volume           = Calculate.Volume(radius);
+
+        Console.WriteLine($"Radius: {radius}");
+        Console.WriteLine($"PI: {Calculate.PI}");
+        Console.WriteLine($"Circumference: {circumference.ToString("F2", CultureInfo.InvariantCulture)}");
+        Console.WriteLine($"Volume: {volume.ToString("F2", CultureInfo.InvariantCulture)}");
+    }
+    #endregion
+
+    #region Currency Converter
+    public class CurrencyConverter
+    {
+        public static double iofRate = 0.06;
+
+        public static double ValuePay(double dollar, int purchaseValue)
+        {
+            double conversion   = dollar * purchaseValue;
+            double valuePay     = conversion * (1 + iofRate);
+
+            return valuePay;
+        }
+    }
+
+    private static void Converter()
+    {
+        double dollar           = 3.10;
+        int purchaseValue       = 200;
+
+        // When a class uses static members
+        // We can call its methods without having to instantiate it
+
+        double valuePay         = CurrencyConverter.ValuePay(dollar, purchaseValue);
+
+        Console.WriteLine($"Amount to be paid in reais = R$ {valuePay.ToString("F2", CultureInfo.InvariantCulture)}");
     }
     #endregion
 }
